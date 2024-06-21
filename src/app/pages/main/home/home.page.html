@@ -1,0 +1,39 @@
+<app-header title="Inicio"></app-header>
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Registro de Jugadores</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let jugador of jugadores">
+      <ion-label [ngStyle]="{'color': jugador.asistio ? 'green' : 'red'}">{{ jugador.nombre }}</ion-label>
+      <ion-button (click)="marcarAsistencia(jugador, true)">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-button>
+      <ion-button (click)="marcarAsistencia(jugador, false)">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+      <ion-button (click)="eliminarJugador(jugador)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngFor="let cancha of canchas" [routerLink]="['/horarios', cancha]">
+    <ion-label>{{ cancha }}</ion-label>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-input [(ngModel)]="nuevoJugador" placeholder="Nuevo jugador"></ion-input>
+    <ion-button (click)="agregarJugador()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-content>
+
+
+
