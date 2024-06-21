@@ -73,9 +73,10 @@ export class FirebaseService {
   }
 
   //Acceder
-  signIn(user: User){
-    return signInWithEmailAndPassword(getAuth(), user.email, user.password)
+  signIn(user: User) {
+    return signInWithEmailAndPassword(getAuth(), user.email, user.password);
   }
+
 
   //Registrar
   signUp(user: User){
@@ -109,4 +110,5 @@ export class FirebaseService {
   async getDocument(path: string) {
     return (await getDoc(doc(getFirestore(), path))).data();
   }
+
 }

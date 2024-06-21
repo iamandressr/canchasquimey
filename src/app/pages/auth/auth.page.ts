@@ -19,32 +19,29 @@ export class AuthPage implements OnInit {
   utilsSvc = inject(UtilsService);
 
   ngOnInit() {}
-
   async submit() {
-
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
-    this.firebaseSvc.signIn(this.form.value as User).then(res => {
-
-      this.getUserInfo(res.user.uid);
-
-
-    }).catch(error => {
-      console.log(error);
-
-      this.utilsSvc.presentToast({
-        message: 'Correo o contraseña incorrecta',
-        duration: 2500,
-        color: 'primary',
-        position: 'middle',
-        icon: 'alert-circle-outline'
+    this.firebaseSvc.signIn(this.form.value as User)
+      .then(res => {
+        this.getUserInfo(res.user.uid);
       })
-
-    }).finally(() => {
-      loading.dismiss();
-    })
+      .catch(error => {
+        console.log(error);
+        this.utilsSvc.presentToast({
+          message: 'Correo o contraseña incorrecta',
+          duration: 2500,
+          color: 'primary',
+          position: 'middle',
+          icon: 'alert-circle-outline'
+        });
+      })
+      .finally(() => {
+        loading.dismiss();
+      });
   }
+
 
   async getUserInfo(uid: string) {
 
