@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { HorariosPageRoutingModule } from './horarios-routing.module';
 
 import { HorariosPage } from './horarios.page';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HorariosPageRoutingModule
+    HorariosPageRoutingModule,
+    SharedModule
   ]
 })
 export class HorariosPageModule {}

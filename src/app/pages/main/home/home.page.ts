@@ -4,6 +4,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Jugador } from 'src/app/models/jugador.model';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,7 @@ export class HomePage implements OnInit {
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -67,14 +68,14 @@ export class HomePage implements OnInit {
       });
   }
 
+  irAHorarios(cancha: string) {
+    this.router.navigate(['/main/horarios', cancha]);
+  }
+
 
 
   //cerrar sesion
   signOut(){
     this.firebaseSvc.signOut();
   }
-
-
-
-
 }

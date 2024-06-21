@@ -1,14 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Horarios - {{ canchaSeleccionada }}</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Horarios"></app-header>
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Horarios</ion-list-header>
-    <!-- <ion-item *ngFor="let horario of horarios" [routerLink]="['/registro-jugadores', canchaSeleccionada, horario]">
+    <ion-list-header>Horarios disponibles</ion-list-header>
+    <ion-item *ngFor="let horario of horariosDisponibles['cancha' + canchaSeleccionada.nombre]">
       <ion-label>{{ horario }}</ion-label>
-    </ion-item> -->
+    </ion-item>
   </ion-list>
 </ion-content>
+
+
+

@@ -16,13 +16,13 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  }
-    ]
   },
   {
     path: 'horarios/:cancha',
-    loadChildren: () => import('./horarios/horarios.module').then( m => m.HorariosPageModule)
+    loadChildren: () => import('./horarios/horarios.module').then(m => m.HorariosPageModule)
   }
+    ]
+  },
 
 ];
 

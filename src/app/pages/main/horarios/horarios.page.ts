@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule } from '@ionic/angular'; // Importar IonicModule
+import { SharedModule } from '../../../shared/shared.module'; 
+import { Cancha } from 'src/app/models/cancha.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-horarios',
   templateUrl: './horarios.page.html',
   styleUrls: ['./horarios.page.scss'],
   standalone: true, // Agregar esta línea
-  imports: [IonicModule] // Agregar IonicModule a los imports
+  imports: [IonicModule, SharedModule, CommonModule] // Agregar IonicModule a los imports
 })
 export class HorariosPage implements OnInit {
-  canchaSeleccionada: string;
+  canchaSeleccionada: Cancha;
   horarios: string[] = [
     '10:30-11:30',
     '11:30-12:30',
@@ -27,11 +30,24 @@ export class HorariosPage implements OnInit {
     '22:30-23:30'
   ];
 
+  horariosDisponibles: { [canchaId: string]: string[] } = {
+    'cancha1': this.horarios,
+    'cancha2': this.horarios,
+    'cancha3': this.horarios,
+    'cancha4': this.horarios,
+    'cancha6': this.horarios,
+    'cancha7': this.horarios,
+    'cancha8': this.horarios,
+    'cancha9': this.horarios,
+  };
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.canchaSeleccionada = params['cancha'];
+      const canchaId = params['cancha'];
+      // Aquí puedes obtener los detalles de la cancha seleccionada desde tu servicio Firebase
+      this.canchaSeleccionada = { id: canchaId, nombre: canchaId, ubicacion: 'Ubicación de la cancha' };
     });
   }
 }
