@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HorariosPage } from './horarios/horarios.page';
 
 import { MainPage } from './main.page';
+import { HorariosPage } from './horarios/horarios.page';
 
 const routes: Routes = [
   {
@@ -18,12 +18,11 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'horarios/:cancha',
-    loadChildren: () => import('./horarios/horarios.module').then(m => m.HorariosPageModule)
-  }
+    path: 'horarios/:canchaId',
+    loadChildren: () => import('./horarios/horarios.module').then( m => m.HorariosPageModule)
+  },
     ]
   },
-
 ];
 
 @NgModule({

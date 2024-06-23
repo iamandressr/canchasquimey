@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IonicModule } from '@ionic/angular'; // Importar IonicModule
-import { SharedModule } from '../../../shared/shared.module'; 
-import { Cancha } from 'src/app/models/cancha.model';
-import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-horarios',
   templateUrl: './horarios.page.html',
   styleUrls: ['./horarios.page.scss'],
-  standalone: true, // Agregar esta línea
-  imports: [IonicModule, SharedModule, CommonModule] // Agregar IonicModule a los imports
 })
 export class HorariosPage implements OnInit {
-  canchaSeleccionada: Cancha;
-  horarios: string[] = [
+  horariosDisponibles: string[] = [
     '10:30-11:30',
     '11:30-12:30',
     '12:30-13:30',
@@ -27,27 +20,50 @@ export class HorariosPage implements OnInit {
     '19:30-20:30',
     '20:30-21:30',
     '21:30-22:30',
-    '22:30-23:30'
+    '22:30-23:30',
   ];
 
-  horariosDisponibles: { [canchaId: string]: string[] } = {
-    'cancha1': this.horarios,
-    'cancha2': this.horarios,
-    'cancha3': this.horarios,
-    'cancha4': this.horarios,
-    'cancha6': this.horarios,
-    'cancha7': this.horarios,
-    'cancha8': this.horarios,
-    'cancha9': this.horarios,
-  };
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
-  constructor(private route: ActivatedRoute) { }
+  irAHorarios(canchaId: string) {
+    this.router.navigate(['/main/horarios', canchaId]);
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const canchaId = params['cancha'];
-      // Aquí puedes obtener los detalles de la cancha seleccionada desde tu servicio Firebase
-      this.canchaSeleccionada = { id: canchaId, nombre: canchaId, ubicacion: 'Ubicación de la cancha' };
-    });
+      const canchaId = params['canchaId'];
+      this.canchaSeleccionada = { id: canchaId, nombre: `Cancha ${canchaId}` };
+    })
   }
+
+  nombreReservador: { [horario: string]: string } = {};
+  canchaSeleccionada: { id: string; nombre: string; };
+  nombresAsignados: { [horario: string]: string } = {};
+  nombreAAsignar: string = '';
+  horarioSeleccionado: string = '';
+  
+
+
+  seleccionarHorario(horario: string) {
+    const nombreReservador = this.nombreReservador[horario];
+    if (nombreReservador) {
+      this.nombreReservador[horario] = nombreReservador;
+    }
+  }
+
+  asignarNombreReservador(horario: string) {
+    const nombreReservador = this.nombreReservador[horario];
+    if (nombreReservador) {
+      this.nombresAsignados[horario] = nombreReservador;
+      console.log('Nombre asignado al horario:', horario, nombreReservador);
+    }
+  }
+  
+  asignarNombre(horario: string) {
+    if (this.nombreAAsignar.trim()) {
+      this.nombresAsignados[horario] = this.nombreAAsignar;
+      this.nombreAAsignar = ''; // Limpia el input después de asignar el nombre
+    }
+  }
+
 }

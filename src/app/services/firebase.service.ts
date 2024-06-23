@@ -6,9 +6,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { getFirestore, setDoc, doc, getDoc } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 import { Cancha } from '../models/cancha.model';
-import { Reserva } from '../models/reserva.model';
 import { Jugador } from '../models/jugador.model';
 import { Observable, from } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ import { Observable, from } from 'rxjs';
 export class FirebaseService {
 
   private canchasCollection: AngularFirestoreCollection<Cancha>;
-  private reservasCollection: AngularFirestoreCollection<Reserva>;
+
 
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
@@ -24,7 +24,7 @@ export class FirebaseService {
 
   constructor(private afs: AngularFirestore) {
     this.canchasCollection = afs.collection<Cancha>('canchas');
-    this.reservasCollection = afs.collection<Reserva>('reservas');
+
   }
 
   // Métodos para canchas
@@ -35,16 +35,7 @@ export class FirebaseService {
   addCancha(cancha: Cancha) {
     return this.canchasCollection.add(cancha);
   }
-
-  // Métodos para reservas
-  getReservas() {
-    return this.reservasCollection.valueChanges();
-  }
-
-  addReserva(reserva: Reserva) {
-    return this.reservasCollection.add(reserva);
-  }
-
+  
 
   // Métodos para jugadores
   getJugadoresReserva(reservaId: string): Observable<Jugador[]> {
@@ -62,7 +53,6 @@ export class FirebaseService {
   eliminarJugadorReserva(reservaId: string, jugadorId: string) {
     return this.afs.collection<Jugador>(`reservas/${reservaId}/jugadores`).doc(jugadorId).delete();
   }
-
 
 
 

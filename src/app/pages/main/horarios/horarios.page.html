@@ -1,13 +1,21 @@
 <app-header title="Horarios"></app-header>
 
+<!-- <h1>{{canchaSeleccionada.nombre}}</h1> -->
 <ion-content>
   <ion-list>
-    <ion-list-header>Horarios disponibles</ion-list-header>
-    <ion-item *ngFor="let horario of horariosDisponibles['cancha' + canchaSeleccionada.nombre]">
-      <ion-label>{{ horario }}</ion-label>
+    <ion-item *ngFor="let horario of horariosDisponibles">
+      <ion-label>
+        <ion-icon name="time-outline"></ion-icon>
+        <h2>{{ horario }}</h2>
+        <ion-input [(ngModel)]="nombreAAsignar" placeholder="Nombre del Cliente"></ion-input>
+      </ion-label>
+      <ion-button (click)="asignarNombre(horarioSeleccionado)">
+        <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="seleccionarHorario(horario)">
+        <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
-
-
 

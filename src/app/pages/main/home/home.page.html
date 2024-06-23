@@ -1,12 +1,24 @@
-<app-header title="Inicio"></app-header>
-
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Registro de Jugadores</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<app-header title="Inicio" backButton=""></app-header>
 
 <ion-content>
+   <ion-list>
+    <ion-item *ngFor="let cancha of canchas">
+      <ion-icon name="football-outline"></ion-icon>
+      <ion-label>{{ cancha }}</ion-label>
+      <ion-button (click)="irAHorarios(cancha)">Ver horarios</ion-button>
+    </ion-item>
+  </ion-list> 
+</ion-content>
+
+
+
+  <!-- Usar en el metodo dentro de los horarios -->
+   <!-- <ion-item>
+    <ion-input [(ngModel)]="nuevoJugador" placeholder="Nuevo jugador"></ion-input>
+    <ion-button (click)="agregarJugador()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-item>  
   <ion-list>
     <ion-item *ngFor="let jugador of jugadores">
       <ion-label [ngStyle]="{'color': jugador.asistio ? 'green' : 'red'}">{{ jugador.nombre }}</ion-label>
@@ -20,28 +32,7 @@
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>
-  </ion-list>
-
-  <!-- <ion-item *ngFor="let cancha of canchas" [routerLink]="['/horarios', cancha]">
-    <ion-label>{{ cancha }}</ion-label>
-  </ion-item> -->
-
-  <ion-list>
-    <ion-item *ngFor="let cancha of canchas">
-      <ion-icon name="football-outline"></ion-icon>
-      <ion-label>{{ cancha }}</ion-label>
-      <ion-button (click)="irAHorarios(cancha)">Ver horarios</ion-button>
-    </ion-item>
-  </ion-list>
-
-
-  <!-- <ion-item>
-    <ion-input [(ngModel)]="nuevoJugador" placeholder="Nuevo jugador"></ion-input>
-    <ion-button (click)="agregarJugador()">
-      <ion-icon name="add"></ion-icon>
-    </ion-button>
-  </ion-item> -->
-</ion-content>
+  </ion-list> -->
 
 
 

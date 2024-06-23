@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HorariosPageRoutingModule } from './horarios-routing.module';
 
 import { HorariosPage } from './horarios.page';
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,6 +16,7 @@ import { SharedModule } from '../../../shared/shared.module';
     IonicModule,
     HorariosPageRoutingModule,
     SharedModule
-  ]
+  ],
+  declarations: [HorariosPage]
 })
 export class HorariosPageModule {}
