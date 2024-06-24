@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DateTimeService } from '../../../services/date-time.service';
 
 @Component({
   selector: 'app-horarios',
@@ -7,6 +8,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./horarios.page.scss'],
 })
 export class HorariosPage implements OnInit {
+
+  currentDateTime: string;
+
   horariosDisponibles: string[] = [
     '10:30-11:30',
     '11:30-12:30',
@@ -23,17 +27,24 @@ export class HorariosPage implements OnInit {
     '22:30-23:30',
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dateTimeService: DateTimeService) { }
 
   irAHorarios(canchaId: string) {
     this.router.navigate(['/main/horarios', canchaId]);
   }
 
   ngOnInit() {
+
+    this.updateDateTime();
+
     this.route.params.subscribe(params => {
       const canchaId = params['canchaId'];
       this.canchaSeleccionada = { id: canchaId, nombre: `Cancha ${canchaId}` };
     })
+  }
+
+  updateDateTime() {
+    this.currentDateTime = this.dateTimeService.getCurrentDateTime();
   }
 
   nombreReservador: { [horario: string]: string } = {};

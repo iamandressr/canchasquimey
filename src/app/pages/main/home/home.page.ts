@@ -5,6 +5,7 @@ import { Jugador } from 'src/app/models/jugador.model';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { Router } from '@angular/router';
+import { DateTimeService } from 'src/app/services/date-time.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  currentDateTime: string;
 
   reservaId: string;
   nuevoJugador: string = '';
@@ -30,9 +33,12 @@ export class HomePage implements OnInit {
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private dateTimeService: DateTimeService) {}
 
   ngOnInit() {
+
+    this.updateDateTime();
+
     this.route.params.subscribe(params => {
       this.reservaId = params['reservaId'];
 
@@ -40,6 +46,9 @@ export class HomePage implements OnInit {
         this.jugadores = jugadores;
       });
     });
+  }
+  updateDateTime() {
+    this.currentDateTime = this.dateTimeService.getCurrentDateTime();
   }
 
   agregarJugador() {

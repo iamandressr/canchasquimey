@@ -2,30 +2,39 @@
 
 <ion-content>
 
- <ion-item>
-  <ion-icon class=" sync" slot="start" name="shirt-outline"></ion-icon>
-  <h1> {{ canchaSeleccionada.id }} </h1>
- </ion-item>
+  <ion-item>
+    <ion-icon class=" sync" slot="start" name="shirt-outline"></ion-icon>
+    <h1> {{ canchaSeleccionada.id }} </h1>
+  </ion-item>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ currentDateTime }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 
   <ion-list>
+    <ion-card>
 
-    <ion-item *ngFor="let horario of horariosDisponibles">
+      <ion-item *ngFor="let horario of horariosDisponibles">
 
-      <ion-label>
-        <ion-icon class="reloj" name="time-outline"></ion-icon>
-        <h1>{{ horario }}</h1>
-        <ion-input [(ngModel)]="nombreAAsignar" placeholder="Nombre del Cliente"></ion-input>
-      </ion-label>
+        <ion-label>
+          <ion-icon class="reloj" name="time-outline"></ion-icon>
+          <h1>{{ horario }}</h1>
+          <ion-input [(ngModel)]="nombreAAsignar" placeholder="Nombre del Cliente"></ion-input>
+        </ion-label>
 
-      <ion-button (click)="asignarNombre(horarioSeleccionado)">
-        <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
-      </ion-button>
+        <ion-button (click)="asignarNombre(horarioSeleccionado)">
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
 
-      <ion-button (click)="seleccionarHorario(horario)">
-        <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-      </ion-button>
+        <ion-button (click)="seleccionarHorario(horario)">
+          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+        </ion-button>
 
-    </ion-item>
+      </ion-item>
 
+    </ion-card>
   </ion-list>
+
 </ion-content>

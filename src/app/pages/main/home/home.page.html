@@ -1,6 +1,15 @@
 <app-header title="Inicio" backButton=""></app-header>
 
 <ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Fecha y Hora</ion-card-title>
+      <ion-card-title>{{ currentDateTime }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  
    <ion-list>
     <ion-item *ngFor="let cancha of canchas">
       <ion-icon class="balon" name="football-outline"></ion-icon>
