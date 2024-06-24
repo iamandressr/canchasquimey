@@ -4,19 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HorariosPageRoutingModule } from './horarios-routing.module';
+import { ListaJugadoresPageRoutingModule } from './lista-jugadores-routing.module';
 
-import { HorariosPage } from './horarios.page';
+import { ListaJugadoresPage } from './lista-jugadores.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule.forRoot(),
-    HorariosPageRoutingModule,
+    IonicModule,
+    ListaJugadoresPageRoutingModule,
     SharedModule
   ],
-  declarations: [HorariosPage]
+  declarations: [ListaJugadoresPage]
 })
-export class HorariosPageModule {}
+export class ListaJugadoresPageModule {}

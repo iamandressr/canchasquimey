@@ -28,7 +28,7 @@
           <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
         </ion-button>
 
-        <ion-button (click)="seleccionarHorario(horario)">
+        <ion-button [routerLink]="['/lista-jugadores', horario]">
           <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
         </ion-button>
 

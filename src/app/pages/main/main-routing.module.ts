@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainPage } from './main.page';
 import { HorariosPage } from './horarios/horarios.page';
+import { ListaJugadoresPage } from './lista-jugadores/lista-jugadores.page';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
     path: 'horarios/:canchaId',
     loadChildren: () => import('./horarios/horarios.module').then( m => m.HorariosPageModule)
   },
+  { path: 'lista-jugadores/:horario',
+    component: ListaJugadoresPage 
+  }
     ]
   },
 ];
