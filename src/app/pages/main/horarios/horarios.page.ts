@@ -11,7 +11,7 @@ export class HorariosPage implements OnInit {
 
   currentDateTime: string;
 
-  horariosDisponibles: string[] = [
+  horariosDisponibles = [
     '10:30-11:30',
     '11:30-12:30',
     '12:30-13:30',
@@ -35,46 +35,9 @@ export class HorariosPage implements OnInit {
 
   ngOnInit() {
 
-    this.updateDateTime();
 
-    this.route.params.subscribe(params => {
-      const canchaId = params['canchaId'];
-      this.canchaSeleccionada = { id: canchaId, nombre: `Cancha ${canchaId}` };
-    })
   }
 
-  updateDateTime() {
-    this.currentDateTime = this.dateTimeService.getCurrentDateTime();
-  }
-
-  nombreReservador: { [horario: string]: string } = {};
-  canchaSeleccionada: { id: string; nombre: string; };
-  nombresAsignados: { [horario: string]: string } = {};
-  nombreAAsignar: string = '';
-  horarioSeleccionado: string = '';
   
-
-
-  seleccionarHorario(horario: string) {
-    const nombreReservador = this.nombreReservador[horario];
-    if (nombreReservador) {
-      this.nombreReservador[horario] = nombreReservador;
-    }
-  }
-
-  asignarNombreReservador(horario: string) {
-    const nombreReservador = this.nombreReservador[horario];
-    if (nombreReservador) {
-      this.nombresAsignados[horario] = nombreReservador;
-      console.log('Nombre asignado al horario:', horario, nombreReservador);
-    }
-  }
-  
-  asignarNombre(horario: string) {
-    if (this.nombreAAsignar.trim()) {
-      this.nombresAsignados[horario] = this.nombreAAsignar;
-      this.nombreAAsignar = ''; // Limpia el input después de asignar el nombre
-    }
-  }
 
 }

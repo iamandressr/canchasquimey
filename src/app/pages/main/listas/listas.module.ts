@@ -4,19 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListaJugadoresPageRoutingModule } from './lista-jugadores-routing.module';
+import { ListasPageRoutingModule } from './listas-routing.module';
 
-import { ListaJugadoresPage } from './lista-jugadores.page';
+import { ListasPage } from './listas.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ListasResolver } from './listas.resolver';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListaJugadoresPageRoutingModule,
+    ListasPageRoutingModule,
     SharedModule
   ],
-  declarations: [ListaJugadoresPage]
+  declarations: [ListasPage],
+  providers: [ListasResolver]
 })
-export class ListaJugadoresPageModule {}
+export class ListasPageModule {}

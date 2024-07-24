@@ -37,51 +37,12 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
-    this.updateDateTime();
-
-    this.route.params.subscribe(params => {
-      this.reservaId = params['reservaId'];
-
-      this.firebaseSvc.getJugadoresReserva(this.reservaId).subscribe(jugadores => {
-        this.jugadores = jugadores;
-      });
-    });
+    this.updateDateTime();  
+    
   }
   updateDateTime() {
     this.currentDateTime = this.dateTimeService.getCurrentDateTime();
   }
-
-  agregarJugador() {
-    if (this.nuevoJugador.trim()) {
-      const jugador: Jugador = {
-        nombre: this.nuevoJugador,
-        asistio: false
-      };
-      this.firebaseSvc.addJugadorReserva(this.reservaId, jugador).then(() => {
-        this.nuevoJugador = '';
-      });
-    }
-  }
-
-  marcarAsistencia(jugador: Jugador, asistio: boolean) {
-    this.firebaseSvc.updateJugadorReserva(this.reservaId, jugador.id, { asistio });
-  }
-
-  eliminarJugador(jugador: Jugador) {
-    this.firebaseSvc.eliminarJugadorReserva(this.reservaId, jugador.id)
-      .then(() => {
-        console.log('Jugador eliminado correctamente');
-      })
-      .catch((error) => {
-        console.error('Error al eliminar jugador:', error);
-      });
-  }
-
-  irAHorarios(cancha: string) {
-    this.router.navigate(['/main/horarios', cancha]);
-  }
-
-
 
   //cerrar sesion
   signOut(){

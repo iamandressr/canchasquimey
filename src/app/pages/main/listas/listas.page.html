@@ -1,0 +1,30 @@
+<app-header title="Lista Jugadores"></app-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-icon class="reloj" slot="start" name="time-outline"></ion-icon>
+    <h1> {{ horarioSeleccionado }} </h1>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [(ngModel)]="nuevoJugador" placeholder="Nuevo jugador"></ion-input>
+    <ion-button >
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let jugador of jugadores">
+      <ion-label [ngStyle]="{'color': jugador.asistio ? 'green' : 'red'}">{{ jugador.nombre }}</ion-label>
+      <ion-button >
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-button>
+      <ion-button >
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+      <ion-button >
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

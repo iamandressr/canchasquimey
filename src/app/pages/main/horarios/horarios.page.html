@@ -4,7 +4,7 @@
 
   <ion-item>
     <ion-icon class=" sync" slot="start" name="shirt-outline"></ion-icon>
-    <h1> {{ canchaSeleccionada.id }} </h1>
+    <h1> </h1>
   </ion-item>
 
   <ion-card>
@@ -21,14 +21,14 @@
         <ion-label>
           <ion-icon class="reloj" name="time-outline"></ion-icon>
           <h1>{{ horario }}</h1>
-          <ion-input [(ngModel)]="nombreAAsignar" placeholder="Nombre del Cliente"></ion-input>
+          <ion-input placeholder="Nombre del Cliente"></ion-input>
         </ion-label>
 
-        <ion-button (click)="asignarNombre(horarioSeleccionado)">
+        <ion-button>
           <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
         </ion-button>
 
-        <ion-button [routerLink]="['/lista-jugadores', horario]">
+        <ion-button>
           <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
         </ion-button>
 

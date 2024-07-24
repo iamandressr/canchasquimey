@@ -7,7 +7,7 @@ import { getFirestore, setDoc, doc, getDoc } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 import { Cancha } from '../models/cancha.model';
 import { Jugador } from '../models/jugador.model';
-import { Observable, from } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
 
 
 @Injectable({
@@ -39,11 +39,33 @@ export class FirebaseService {
 
   // Métodos para jugadores
   getJugadoresReserva(reservaId: string): Observable<Jugador[]> {
-    return this.afs.collection<Jugador>(`reservas/${reservaId}/jugadores`).valueChanges({ idField: 'id' });
+    if (!reservaId) {
+      // Manejar el caso cuando reservaId está vacío
+      return new Observable<Jugador[]>(); // Puedes retornar un Observable vacío o manejar el error de otra manera
+    }
+  
+    const jugadoresCollection = this.afs.collection<Jugador>(`reservas/${reservaId}/jugadores`);
+    return jugadoresCollection.snapshotChanges().pipe(
+      map(actions => actions.map(action => {
+        const data = action.payload.doc.data() as Jugador;
+        const id = action.payload.doc.id;
+        return { ...data, id };
+      }))
+    );
   }
 
-  addJugadorReserva(reservaId: string, jugador: Jugador) {
-    return this.afs.collection<Jugador>(`reservas/${reservaId}/jugadores`).add(jugador);
+  addJugadorReserva(reservaId: string, jugador: Jugador, horarioSeleccionado: string): Promise<any> {
+    console.log('Intentando agregar jugador:', jugador);
+  
+    const jugadorData = { ...jugador, horarioSeleccionado };
+    const jugadoresCollection = this.afs.collection(`reservas/${reservaId}/jugadores`);
+    return jugadoresCollection.add(jugadorData)
+      .then((docRef) => {
+        console.log('Jugador agregado correctamente:', docRef.id);
+      })
+      .catch((error) => {
+        console.error('Error al agregar jugador:', error);
+      });
   }
 
   updateJugadorReserva(reservaId: string, jugadorId: string, jugador: Partial<Jugador>) {
@@ -53,6 +75,8 @@ export class FirebaseService {
   eliminarJugadorReserva(reservaId: string, jugadorId: string) {
     return this.afs.collection<Jugador>(`reservas/${reservaId}/jugadores`).doc(jugadorId).delete();
   }
+
+  
 
 
 
