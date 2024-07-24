@@ -22,9 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'horarios/:canchaId',
-    loadChildren: () => import('./horarios/horarios.module').then( m => m.HorariosPageModule)
+    path: 'horarios/:id',
+    loadChildren: () => import('./horarios/horarios.module').then(m => m.HorariosPageModule)
   },
+  
   {
     path: 'listas/:reservaId/:horario',
     loadChildren: () => import('./listas/listas.module').then(m => m.ListasPageModule),

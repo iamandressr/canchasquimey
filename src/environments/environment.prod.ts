@@ -7,5 +7,6 @@ export const environment = {
     storageBucket: "canchas-quimey.appspot.com",
     messagingSenderId: "182640611067",
     appId: "1:182640611067:web:e06b140a16b451e24a2a5e"
-  }
+  },
+  mysqlApiUrl: 'https://your-production-api-url.com/api'
 };

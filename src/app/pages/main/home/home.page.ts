@@ -1,11 +1,9 @@
-import { Component, OnInit, inject, Injectable } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { DatabaseService } from 'src/app/services/database.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Jugador } from 'src/app/models/jugador.model';
-import { ActivatedRoute } from '@angular/router';
-import { combineLatest } from 'rxjs';
-import { Router } from '@angular/router';
 import { DateTimeService } from 'src/app/services/date-time.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,39 +11,43 @@ import { DateTimeService } from 'src/app/services/date-time.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
   currentDateTime: string;
-
-  reservaId: string;
-  nuevoJugador: string = '';
-  jugadores: Jugador[] = [];
-  canchas = [
-    'Cancha 1',
-    'Cancha 2',
-    'Cancha 3',
-    'Cancha 4',
-    'Cancha 6',
-    'Cancha 7',
-    'Cancha 8',
-    'Cancha 9',
-  ];
+  canchas: any[] = [];
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
 
-  constructor(private route: ActivatedRoute, private router: Router, private dateTimeService: DateTimeService) {}
+  constructor(
+    private router: Router,
+    private databaseService: DatabaseService,
+    private dateTimeService: DateTimeService
+  ) {}
 
   ngOnInit() {
-
-    this.updateDateTime();  
-    
+    this.updateDateTime();
+    this.loadCanchas();
   }
+
   updateDateTime() {
     this.currentDateTime = this.dateTimeService.getCurrentDateTime();
   }
 
-  //cerrar sesion
-  signOut(){
+  loadCanchas() {
+    this.databaseService.getCanchas().subscribe(
+      (data) => {
+        this.canchas = data;
+      },
+      (error) => {
+        console.error('Error al cargar las canchas:', error);
+      }
+    );
+  }
+
+  verHorarios(canchaId: number) {
+    this.router.navigate(['/horarios', canchaId]);
+  }
+
+  signOut() {
     this.firebaseSvc.signOut();
   }
 }
