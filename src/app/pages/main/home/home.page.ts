@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
   }
 
   verHorarios(canchaId: number) {
-    this.router.navigate(['/horarios', canchaId]);
+    this.router.navigateByUrl(`/main/horarios/${canchaId}`);
   }
 
   signOut() {

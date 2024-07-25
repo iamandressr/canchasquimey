@@ -14,7 +14,6 @@ export class DatabaseService {
     return this.http.get<any[]>(`${this.apiUrl}/canchas`);
   }
 
-  // Puedes agregar más métodos según necesites, por ejemplo:
   getHorarios(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/horarios`);
   }

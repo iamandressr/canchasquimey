@@ -14,9 +14,17 @@ const connection = mysql.createConnection({
   database: 'canchasquimey'
 });
 
-// Ruta de ejemplo para obtener las canchas
+// Ruta para obtener las canchas
 app.get('/api/canchas', (req, res) => {
   connection.query('SELECT * FROM Canchas', (error, results) => {
+    if (error) throw error;
+    res.json(results);
+  });
+});
+
+// Ruta para obtener los horarios
+app.get('/api/horarios', (req, res) => {
+  connection.query('SELECT * FROM Horarios', (error, results) => {
     if (error) throw error;
     res.json(results);
   });

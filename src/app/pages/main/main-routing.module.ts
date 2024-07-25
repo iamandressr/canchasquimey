@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainPage } from './main.page';
 import { HorariosPage } from './horarios/horarios.page';
-import { ListasPage } from './listas/listas.page';
-import { ListasResolver } from './listas/listas.resolver';
 
 
 
@@ -14,27 +12,25 @@ const routes: Routes = [
     component: MainPage,
     children: [
       {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'horarios/:id',
-    loadChildren: () => import('./horarios/horarios.module').then(m => m.HorariosPageModule)
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+      },
+      {
+        path: 'horarios/:id',
+        loadChildren: () => import('./horarios/horarios.module').then(m => m.HorariosPageModule)
+      },
+      {
+        path: 'registro-personas/:horarioId',
+        loadChildren: () => import('./registro-personas/registro-personas.module').then(m => m.RegistroPersonasPageModule)
+      }
+    ],
   },
   
-  {
-    path: 'listas/:reservaId/:horario',
-    loadChildren: () => import('./listas/listas.module').then(m => m.ListasPageModule),
-    resolve: {
-      routeData: ListasResolver
-    }
-  }
-    ],
-  }
+
 ];
 
 @NgModule({

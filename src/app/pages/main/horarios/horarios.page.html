@@ -17,21 +17,15 @@
     <ion-card>
 
       <ion-item *ngFor="let horario of horariosDisponibles">
-
         <ion-label>
           <ion-icon class="reloj" name="time-outline"></ion-icon>
-          <h1>{{ horario }}</h1>
+          <h1>{{ horario.hora_inicio }} - {{ horario.hora_fin }}</h1>
           <ion-input placeholder="Nombre del Cliente"></ion-input>
+          <ion-button (click)="irARegistroPersonas(horario.id)">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+          </ion-button>
         </ion-label>
-
-        <ion-button>
-          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
-        </ion-button>
-
-        <ion-button>
-          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-        </ion-button>
-
+        <!-- ... botones ... -->
       </ion-item>
 
     </ion-card>
